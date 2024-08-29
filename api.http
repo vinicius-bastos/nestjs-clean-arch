@@ -1,0 +1,13 @@
+GET http://localhost:3000/projects
+
+###
+GET http://localhost:3000/projects/1
+
+###
+POST http://localhost:3000/projects
+Content-Type: : application/json
+
+{
+  "name": "teste",
+  "description": "teste"
+}
