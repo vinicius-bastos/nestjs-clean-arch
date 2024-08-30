@@ -15,26 +15,33 @@ export class Project {
   @Column()
   name: string;
 
+  @Column()
+  description: string;
+
   @Column({ nullable: true, type: 'datetime' })
-  started_at : Date | null;
+  started_at: Date | null;
 
   @Column({ nullable: true, type: 'datetime' })
   cancelled_at: Date | null;
 
   @Column({ nullable: true, type: 'datetime' })
+  finished_at: Date | null;
+
+  @Column({ nullable: true, type: 'datetime' })
   forecasted_at: Date | null;
 
   @Column({ type: 'simple-enum' })
-  status: ProjectStatus;
+  status: ProjectStatus = ProjectStatus.PENDING;
 
-  constructor(props: {
-    name: string;
-    description: string;
-    stardet_at?: Date | null;
-    cancelled_at?: Date | null;
-    forecasted_at?: Date | null;
-  },
-  id?: string,
+  constructor(
+    props: {
+      name: string;
+      description: string;
+      stardet_at?: Date | null;
+      cancelled_at?: Date | null;
+      forecasted_at?: Date | null;
+    },
+    id?: string,
   ) {
     Object.assign(this, props);
     this.id = id ?? crypto.randomUUID();

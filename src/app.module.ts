@@ -11,7 +11,7 @@ import { Project } from './projects/entities/project.entity';
       type: 'sqlite',
       database: ':memory',
       entities: [Project],
-      synchronize: true
+      synchronize: true,
     }),
     ProjectsModule,
   ],
