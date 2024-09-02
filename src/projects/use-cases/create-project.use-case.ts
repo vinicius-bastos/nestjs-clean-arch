@@ -1,12 +1,19 @@
 import { CreateProjectDto } from '../dto/create-project.dto';
-import { Project, ProjectStatus } from '../entities/project.entity';
+import { Project } from '../entities/project.entity';
+import { Inject, Injectable } from '@nestjs/common';
+import { IProjectRepository } from '../project.repository';
 
+@Injectable()
 export class CreateProjectUseCase {
-  execute(input: CreateProjectDto) {
-    const project = new Project(createProjectDto);
-    if (createProjectDto.started_at) {
-      project.status = ProjectStatus.ACTIVE;
-    }
-    return this.projectRepo.save(project);
+  constructor(
+    @Inject('IProjectRepository')
+    private readonly projectRepo: IProjectRepository,
+  ) {}
+
+  async execute(input: CreateProjectDto) {
+    const project = new Project(input);
+
+    await this.projectRepo.create(project);
+    return project;
   }
 }
