@@ -1,18 +1,15 @@
-import { StartProjectDto } from '../dto/start-project.dto';
 import { Inject, Injectable } from '@nestjs/common';
 import { IProjectRepository } from '../project.repository';
 
 @Injectable()
-export class StartProjectUseCase {
+export class FindProjectUseCase {
   constructor(
     @Inject('IProjectRepository')
     private readonly projectRepo: IProjectRepository,
   ) {}
 
-  async execute(id: string, input: StartProjectDto) {
+  async execute(id: string) {
     const project = await this.projectRepo.findById(id);
-    project.start(input.started_at);
-    await this.projectRepo.update(project);
     return project;
   }
 }

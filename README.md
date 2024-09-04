@@ -83,3 +83,48 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+# Directories architecture
+
+```
+src
+├── modules
+│   ├── projects
+│   │   ├── entities
+│   │   │   └── project.entity.ts
+│   │   ├── use-cases
+│   │   │   ├── create-project.use-case.ts
+│   │   │   ├── update-project.use-case.ts
+│   │   │   └── delete-project.use-case.ts
+│   │   ├── interfaces
+│   │   │   ├── project.repository.interface.ts
+│   │   │   └── project.service.interface.ts
+│   │   ├── controllers
+│   │   │   └── project.controller.ts
+│   │   └── dtos
+│   │       ├── create-project.dto.ts
+│   │       └── update-project.dto.ts
+│   ├── studies
+│   │   ├── entities
+│   │   │   └── study.entity.ts
+│   │   ├── use-cases
+│   │   │   ├── create-study.use-case.ts
+│   │   │   ├── update-study.use-case.ts
+│   │   │   └── delete-study.use-case.ts
+│   │   ├── interfaces
+│   │   │   ├── study.repository.interface.ts
+│   │   │   └── study.service.interface.ts
+│   │   ├── controllers
+│   │   │   └── study.controller.ts
+│   │   └── dtos
+│   │       ├── create-study.dto.ts
+│   │       └── update-study.dto.ts
+├── infrastructure
+│   ├── repositories
+│   ├── external-services
+│   └── database
+├── app.module.ts
+├── main.ts
+└── config
+
+```
