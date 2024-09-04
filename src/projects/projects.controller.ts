@@ -5,16 +5,16 @@ import {
   Body,
   Patch,
   Param,
-  Delete,
   Inject,
 } from '@nestjs/common';
 import { CreateProjectDto } from './dto/create-project.dto';
-import { UpdateProjectDto } from './dto/update-project.dto';
+import { ChangeProjectDto } from './dto/change-project.dto';
 import { CreateProjectUseCase } from './use-cases/create-project.use-case';
 import { FindAllProjectsUseCase } from './use-cases/find-all-projects.use-case';
 import { StartProjectUseCase } from './use-cases/start-project.use-case';
 import { StartProjectDto } from './dto/start-project.dto';
 import { FindProjectUseCase } from './use-cases/find-project.use-case';
+import { ChangeProjectUseCase } from './use-cases/change-project.use-case';
 
 @Controller('projects')
 export class ProjectsWithUseCaseController {
@@ -29,6 +29,9 @@ export class ProjectsWithUseCaseController {
 
   @Inject(FindProjectUseCase)
   private readonly findProjectUseCase: FindProjectUseCase;
+
+  @Inject(ChangeProjectUseCase)
+  private readonly changeProjectUseCase: ChangeProjectUseCase;
 
   @Post()
   create(@Body() createProjectDto: CreateProjectDto) {
@@ -50,10 +53,10 @@ export class ProjectsWithUseCaseController {
     return this.findProjectUseCase.execute(id);
   }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateProjectDto: UpdateProjectDto) {
-  //   return this.projectsService.update(id, updateProjectDto);
-  // }
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateProjectDto: ChangeProjectDto) {
+    return this.changeProjectUseCase.execute(id, updateProjectDto);
+  }
 
   // @Delete(':id')
   // remove(@Param('id') id: string) {

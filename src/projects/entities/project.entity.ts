@@ -64,7 +64,43 @@ export class Project {
       throw new Error('Cannot start cancelled project');
     }
 
+    if (this.forecasted_at && started_at < this.forecasted_at) {
+      throw new Error(
+        'Cannot change started date, started date need to be less than forecasted date',
+      );
+    }
+
     this.started_at = started_at;
     this.status = ProjectStatus.ACTIVE;
+  }
+
+  changeName(name: string) {
+    this.name = name;
+  }
+
+  changeDescription(description: string) {
+    this.description = description;
+  }
+
+  changeForecastedDate(forecasted_at: Date) {
+    if (this.status === ProjectStatus.COMPLETED) {
+      throw new Error(
+        'Cannot change forecasted date, project is alrealdy completed',
+      );
+    }
+
+    if (this.status === ProjectStatus.CANCELLED) {
+      throw new Error('Cannot change forecasted date, project is cancelled');
+    }
+
+    if (
+      this.status === ProjectStatus.ACTIVE &&
+      this.started_at >= forecasted_at
+    ) {
+      throw new Error(
+        'Cannot change forecasted date, forecasted date need to be greather than started date',
+      );
+    }
+    this.forecasted_at = forecasted_at;
   }
 }

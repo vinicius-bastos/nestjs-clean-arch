@@ -23,7 +23,7 @@ Content-Type: application/json
 {
   "name": "Project 1 updated",
   "description": "Description 1 updated",
-  "started_at": "2020-01-01"
+  "forecasted_at": "2020-01-01"
 }
 
 ###
@@ -31,5 +31,5 @@ POST http://localhost:3000/projects/{{project_id}}/start
 Content-Type: application/json
 
 {
-  "started_at": "2020-01-01"
+  "started_at": "2021-01-01"
 }
